@@ -1,0 +1,11 @@
+{
+    "stocks" : [
+        {"ticker_symbol" : "AAPL", "company_name" : "Apple Inc."},
+        {"ticker_symbol" : "GOOGL", "company_name" : "Alphabet Inc."},
+        {"ticker_symbol" : "AMZN", "company_name" : "Amazon.com, Inc."},
+        {"ticker_symbol" : "MSFT", "company_name" : "Microsoft Corporation"},
+        {"ticker_symbol" : "TSLA", "company_name" : "Tesla, Inc."}
+    ],
+
+    "fetch_period" : "10d"
+}
