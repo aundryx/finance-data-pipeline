@@ -1,5 +1,7 @@
 import logging 
 import os
+import json
+from fetch_stock_data import fetch_stock_data
 
 def setup_logging():
     os.makedirs("logs", exist_ok=True) # Creates a folder directory called logs if it doesn't exist
@@ -23,12 +25,26 @@ def setup_logging():
 
     return logger
 
+def load_config():
+    with open("config.json", "r") as f:
+        config = json.load(f)
+    return config
 
 def main():
     logger = setup_logging() 
     logger.info("Pipeline started")
 
+    stocks = load_config()
+    logger.info(f"Loaded config: {len(stocks['stocks'])} stocks to fetch")
+
+
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
 
 
