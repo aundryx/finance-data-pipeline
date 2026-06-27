@@ -3,15 +3,19 @@ import os
 import json
 from fetch_stock_data import fetch_stock_data
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CONFIG_PATH = os.path.join(BASE_DIR, "..", "config.json")
+logs_dir = os.path.join(BASE_DIR, "..", "logs")
+
 def setup_logging():
-    os.makedirs("logs", exist_ok=True) # Creates a folder directory called logs if it doesn't exist
+    os.makedirs(logs_dir, exist_ok=True) # Creates a folder directory called logs if it doesn't exist
 
     # This define the the format of logging messages and the date format
     # The logging messages will include the timestamp, log level, and the actual message
     # The date format is set to "YYYY-MM-DD HH:MM:SS"
     formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
 
-    file_handler = logging.FileHandler("logs/pipeline.log") # This creates a file handler that writes log messages to a file named "pipeline.log" in the "logs" directory
+    file_handler = logging.FileHandler(os.path.join(logs_dir, "pipeline.log")) # This creates a file handler that writes log messages to a file named "pipeline.log" in the "logs" directory
     file_handler.setFormatter(formatter) # This sets the formatter for the file handler to the formatter defined earlier
 
     console_handler = logging.StreamHandler() # This creates a console handler that outputs log messages to the console/terminal
@@ -26,7 +30,7 @@ def setup_logging():
     return logger
 
 def load_config():
-    with open("config.json", "r") as f:
+    with open(CONFIG_PATH, "r") as f:
         config = json.load(f)
     return config
 
