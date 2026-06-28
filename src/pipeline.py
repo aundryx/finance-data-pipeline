@@ -2,9 +2,11 @@ import logging
 import os
 import json
 from fetch_stock_data import fetch_stock_data
+from db_connection import get_db_connection
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-CONFIG_PATH = os.path.join(BASE_DIR, "..", "config.json")
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__)) 
+CONFIG_PATH = os.path.join(BASE_DIR, "..", "config.json") 
 logs_dir = os.path.join(BASE_DIR, "..", "logs")
 
 def setup_logging():
@@ -32,12 +34,39 @@ def load_config():
     return config
 
 def main():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
     logger = setup_logging() 
-    logger.info("Pipeline started")
 
-    stocks = load_config()
-    logger.info(f"Loaded config: {len(stocks['stocks'])} stocks to fetch")
+    config = load_config()
 
+    logger.info(f"Starting ETL pipeline for {len(config['stocks'])} stocks")
+
+    for stock in config["stocks"]:
+        logger.info(f"Fetching data for {stock['ticker_symbol']}")
+
+        try:
+            stock_to_fetch = fetch_stock_data(stock['ticker_symbol'], stock['company_name'])
+            logger.info(f"Transforming data for {stock['ticker_symbol']}")
+
+            for index, row in stock_to_fetch.iterrows():
+                cursor.execute(
+                    "INSERT INTO stock_prices (ticker, company_name, trade_date, open_price, close_price, high_price, low_price, volume) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) ON CONFLICT (ticker, trade_date) DO NOTHING",
+                    (row['ticker'], row['company_name'], row['trade_date'], row['open_price'], row['close_price'], row['high_price'], row['low_price'], row['volume']) 
+                )
+
+            conn.commit()
+            logger.info(f"Successfully loaded {len(stock_to_fetch)} rows for {stock['ticker_symbol']}")
+
+        except Exception as e:
+            logger.error(e)
+            continue
+
+    cursor.close() 
+    conn.close()
+    logger.info("Pipeline completed")
+        
 
 if __name__ == "__main__":
     main()
