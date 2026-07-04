@@ -2,7 +2,7 @@ import logging
 import os
 import json
 from fetch_stock_data import fetch_stock_data
-from db_connection import get_db_connection
+from db_connection import get_rds_connection
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__)) 
@@ -34,10 +34,12 @@ def load_config():
     return config
 
 def main():
-    conn = get_db_connection()
-    cursor = conn.cursor()
-
     logger = setup_logging() 
+
+    conn = get_rds_connection()
+    logger.info("Connected to the database")
+
+    cursor = conn.cursor()
 
     config = load_config()
 
