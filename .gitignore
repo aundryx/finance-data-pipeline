@@ -220,3 +220,6 @@ __marimo__/
 # Log files
 logs/
 *.log
+
+# AWS key files
+*.pem 
