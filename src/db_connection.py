@@ -38,6 +38,8 @@ def get_snowflake_connection():
         database = os.getenv("SNOWFLAKE_DATABASE"),
         schema = os.getenv("SNOWFLAKE_SCHEMA"),
         warehouse = os.getenv("SNOWFLAKE_WAREHOUSE")
+        login_timeout = 60
+        network_timeout = 60
     )
 
     return conn
