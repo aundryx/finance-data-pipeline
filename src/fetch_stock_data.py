@@ -33,7 +33,3 @@ def fetch_stock_data(ticker_symbol, company_name):
 
     return history_reset
 
-#print(stock)
-#print(history_reset["Date"])
-#print(history_reset.columns)
-#print(history_reset.head())
