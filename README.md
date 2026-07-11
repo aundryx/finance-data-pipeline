@@ -3,7 +3,7 @@ This project is an automated end to end pipeline that collects daily stock marke
 
 ## Data Architecture
  
-<img src="docs/images/diagram.png" alt="pipeline diagram" width= "500" height= "500">
+<img src="docs/images/pipeline_diagram.png" alt="pipeline diagram" width= "500" height= "500">
 
 ## Tech Stack
 
