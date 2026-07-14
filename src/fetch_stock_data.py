@@ -1,5 +1,5 @@
 import yfinance as yf
-import pandas as pd
+
 
 def fetch_stock_data(ticker_symbol, company_name):
 
