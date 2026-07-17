@@ -224,8 +224,5 @@ logs/
 # AWS key files
 *.pem 
 
-# emails.json
-emails.json
-
 # Temporary data files
 data/*.csv
