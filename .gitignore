@@ -226,3 +226,6 @@ logs/
 
 # emails.json
 emails.json
+
+# Temporary data files
+data/*.csv
