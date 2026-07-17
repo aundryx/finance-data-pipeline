@@ -4,10 +4,9 @@ from datetime import datetime, timedelta
 import os
 import json
 
-config_path = os.path.dirname(os.path.abspath(__file__))
+config_path = os.path.dirname(os.path.abspath(__file__), '..', 'config.json')
 with open(config_path, "r") as f:
     config = json.load(f)
-
 
 default_args = {
     'owner' : 'airflow',
