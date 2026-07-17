@@ -11,8 +11,7 @@
 
     "temp_data_path" : "data/stock_data",
 
-    "emails" : [
-        "put_your_emails_here"
-    ]
+    "emails" : "put_your_emails_here"
+
 
 }
