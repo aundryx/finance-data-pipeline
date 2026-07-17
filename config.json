@@ -9,6 +9,10 @@
 
     "fetch_period" : "10d",
 
-    "temp_data_path" : "data/stock_data"
+    "temp_data_path" : "data/stock_data",
+
+    "emails" : [
+        "put_your_emails_here"
+    ]
 
 }
