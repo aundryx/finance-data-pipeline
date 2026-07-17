@@ -223,3 +223,6 @@ logs/
 
 # AWS key files
 *.pem 
+
+# emails.json
+emails.json
