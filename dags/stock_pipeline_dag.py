@@ -1,14 +1,16 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
+from json_loader import load_emails
 
+emails = load_emails()
 
 default_args = {
     'owner' : 'airflow',
     'retries' : 2,
     'retry_delay' : timedelta(minutes=2),
     'email_on_failure' : True,
-    'email' : ['kyleaundryx@gmail.com', 'kyleaundry15@gmail.com']
+    'email' : [emails['emails']]
 }
   
 with DAG (
