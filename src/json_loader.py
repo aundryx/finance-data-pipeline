@@ -10,7 +10,11 @@ def load_config():
         config = json.load(f)
     return config
 
-
+def load_emails():
+    CONFIG_PATH = os.path.join(BASE_DIR, "..", "emails.json")
+    with open(CONFIG_PATH, "r") as f:
+        emails = json.load(f)
+    return emails
  
 
         
