@@ -1,16 +1,20 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
-from json_loader import load_emails
+import os
+import json
 
-emails = load_emails()
+config_path = os.path.dirname(os.path.abspath(__file__))
+with open(config_path, "r") as f:
+    config = json.load(f)
+
 
 default_args = {
     'owner' : 'airflow',
     'retries' : 2,
     'retry_delay' : timedelta(minutes=2),
     'email_on_failure' : True,
-    'email' : [emails['emails']]
+    'email' : config.get("emails")
 }
   
 with DAG (
