@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 import os
 import json
 
-config_path = '/home/ubuntu/finance-data-pipeline/config.json'
+config_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "config.json")
 with open(config_path, "r") as f:
     config = json.load(f)
 
